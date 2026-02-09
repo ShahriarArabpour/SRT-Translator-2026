@@ -1,7 +1,6 @@
 # AG5 Translator (Persian AI Subtitle Translator)
 
-A specialized Python tool for translating technical subtitles (SRT) from English to Persian (Farsi), powered by Google Gemini (Pro/Flash).
-Built with a focus on **technical accuracy**, **context awareness**, and **RTL direction correction**.
+A specialized Python tool for translating technical subtitles (SRT) from English to Persian (Farsi), powered by Google Gemini. Built for AI researchers, engineers, and developers who need accurate technical translations with perfect RTL display.
 
 [فارسی](#راهنمای-فارسی) | [English](#english-guide)
 
@@ -9,60 +8,72 @@ Built with a focus on **technical accuracy**, **context awareness**, and **RTL d
 
 ## English Guide
 
-### Features
-- **Context-Aware Translation:** Translates in chunks (20 lines) to maintain context.
-- **Strict Instruction Following:** Uses `instructions.md` to prevent translating technical terms (e.g., "RAG", "LangChain").
-- **Glossary Support:** Enforces specific terminology via `glossary.json`.
-- **RTL Fix (Nuclear Option):** Automatically wraps every Persian line with `RLE` (Right-to-Left Embedding) and `PDF` (Pop Directional Format) characters to ensure perfect display in players like PotPlayer/VLC mixed with English words.
-- **Windows Friendly:** Saves as `UTF-8-SIG` (BOM) to prevent encoding issues on Windows players.
+### 🚀 Key Features
+- **Context-Aware Translation:** Processes 30 lines (approx. 2-3 minutes of video) per chunk to maintain coherent grammar and meaning.
+- **RLE/PDF Sandwich (Industry Standard):** Automatically wraps every Persian line with `RLE` (\u202B) and `PDF` (\u202C) control characters. This prevents LTR words (like "Python" or "RAG") from flipping the sentence order in players like PotPlayer, VLC, or Plex.
+- **ASR & Technical Correction:** Uses `glossary.json` and AI instructions to fix Speech-To-Text errors (e.g., `lama index` → `LlamaIndex`) and keeps technical terms in English.
+- **Windows Optimized:** Saves files as `UTF-8 with BOM` (utf-8-sig) to ensure Windows Notepad and players detect Persian encoding correctly.
 
-### Setup
+### 🛠️ Setup & Installation
 1. **Install Python 3.10+**
-2. **Install Dependencies:**
+2. **Clone/Download** this repository.
+3. **Install Requirements:**
    ```bash
    pip install -r requirements.txt
    ```
-3. **API Key:**
-   - Create a `.env` file (see `.env.example` if available) and add: `GEMINI_API_KEY=your_key_here`
-   - Or pass it via command line.
+4. **Configure API Key:**
+   - Create a `.env` file in the root directory.
+   - Add your key: `GEMINI_API_KEY=your_google_ai_studio_key`
+   - Get a free key at [Google AI Studio](https://aistudio.google.com/).
 
-### Usage
-1. Place your `.srt` files in the `input/` folder.
-2. Run the script:
+### 📖 Usage (Step-by-Step)
+1. **Prepare:** Put your English `.srt` files into the `input/` folder.
+2. **Translate:**
    ```bash
-   # Default (Uses Gemini 2.5 Pro for best quality)
+   # Default: Uses gemini-2.5-flash (Fast & Reliable)
    python main.py
 
-   # Use a faster model
-   python main.py --model gemini-2.0-flash
+   # Use High Quality:
+   python main.py --model gemini-2.5-pro
    ```
-3. Find the translated files in `output/` folder.
+3. **Collect:** Your translated file will appear in the `output/` folder.
+4. **Customize:**
+   - Edit `instructions.md` to change the translation tone.
+   - Edit `glossary.json` to add new technical terms that shouldn't be translated.
 
 ---
 
 ## راهنمای فارسی
 
-### معرفی
-این ابزار برای ترجمه دقیق و تخصصی زیرنویس‌های انگلیسی به فارسی طراحی شده است. تمرکز اصلی روی حفظ کلمات تخصصی (مثل RAG, Embedding) و حل مشکل نمایش متون فارسی/انگلیسی در پلیرها است.
+### 🇮🇷 معرفی ابزار
+این ابزار یک مترجم هوشمند زیرنویس (SRT) است که مخصوص ویدیوهای تکنولوژی و برنامه‌نویسی طراحی شده. برخلاف مترجم‌های معمولی، این ابزار تفاوت بین کدهای برنامه‌نویسی و متن عادی را می‌فهمد و با استفاده از مدل‌های Gemini، ترجمه‌ای روان و دقیق ارائه می‌دهد.
 
-### ویژگی‌ها
-- **ترجمه هوشمند:** زیرنویس‌ها را خط به خط ترجمه نمی‌کند، بلکه ۲۰ خط را همزمان می‌خواند تا معنی جملات ناقص را بفهمد.
-- **حل مشکل راست‌چین (RTL):** به صورت خودکار کدهای نامرئی `RLE` را به خطوط اضافه می‌کند تا در PotPlayer و KMPlayer کلمات انگلیسی باعث بهم‌ریختگی جمله نشوند.
-- **دیکشنری تخصصی:** با استفاده از فایل `glossary.json` می‌توانید تعیین کنید چه کلماتی ترجمه نشوند.
-- **فرمت استاندارد:** خروجی `UTF-8-SIG` است که بهترین سازگاری را با ویندوز دارد.
+### ✨ قابلیت‌های اصلی
+- **درک متن (Context):** زیرنویس را تکه‌تکه (۳۰ خطی) ترجمه می‌کند تا جملاتی که در چند خط پخش شده‌اند، درست معنی شوند.
+- **حل مشکل بهم‌ریختگی متن (RTL Fix):** از روش استاندارد `RLE/PDF Sandwich` استفاده می‌کند. این یعنی حتی اگر وسط جمله فارسی کلمه انگلیسی (مثل LlamaIndex) باشد، چیدمان جمله در پلیر (PotPlayer/VLC) بهم نمی‌خورد.
+- **اصلاح خطاهای صوتی (ASR):** اگر در فایل اصلی اشتباه شنیداری وجود داشته باشد (مثلاً `land chain`), ابزار آن را به صورت هوشمند به (`LangChain`) اصلاح می‌کند.
+- **سازگاری کامل با ویندوز:** فایل‌ها با فرمت `UTF-8 with BOM` ذخیره می‌شوند تا در تمام سیستم‌ها بدون مشکل فونت باز شوند.
 
-### نصب و اجرا
-۱. پایتون را نصب کنید.
-۲. پیش‌نیازها را نصب کنید:
+### ⚙️ نصب و راه‌اندازی
+۱. **پایتون:** مطمئن شوید پایتون ۳.۱۰ به بالا نصب است.
+۲. **نصب پیش‌نیازها:**
    ```bash
    pip install -r requirements.txt
    ```
-۳. کلید API جمنای (Google Gemini) را در فایل `.env` قرار دهید.
+۳. **دریافت کلید API:**
+   - یک فایل به نام `.env` بسازید.
+   - کد `GEMINI_API_KEY=کد_شما` را داخل آن قرار دهید.
+   - کلید رایگان را از [Google AI Studio](https://aistudio.google.com/) بگیرید.
 
-### روش استفاده
-۱. فایل‌های SRT انگلیسی را در پوشه `input` بریزید.
-۲. دستور زیر را اجرا کنید:
+### 🎯 آموزش استفاده گام‌به‌گام
+۱. فایل‌های زیرنویس انگلیسی خود را در پوشه `input` کپی کنید.
+۲. خط فرمان (Terminal/CMD) را باز کنید و دستور زیر را تایپ کنید:
    ```bash
    python main.py
    ```
-۳. فایل ترجمه شده در پوشه `output` قرار می‌گیرد.
+۳. منتظر بمانید تا پیام `SUCCESS!` ظاهر شود.
+۴. فایل ترجمه شده و آماده تماشا را از پوشه `output` بردارید.
+
+### 💡 شخصی‌سازی
+- **glossary.json:** کلماتی که نمی‌خواهید ترجمه شوند را در اینجا وارد کنید.
+- **instructions.md:** می‌توانید به هوش مصنوعی بگویید لحن ترجمه چطور باشد (مثلاً خودمانی یا رسمی).
