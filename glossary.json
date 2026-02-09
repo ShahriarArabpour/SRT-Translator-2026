@@ -1,0 +1,20 @@
+{
+  "terms": {
+    "RAG": "RAG",
+    "Retriever": "Retriever",
+    "Embedding": "Embedding",
+    "Vector Store": "Vector Store",
+    "Agent": "Agent",
+    "Pipeline": "پایپ‌لاین",
+    "Deployment": "دیپلوی",
+    "Open Source": "اوپن‌سورس",
+    "Framework": "فریم‌ورک",
+    "Orchestration": "Orchestration"
+  },
+  "asr_corrections": {
+    "lama index": "LlamaIndex",
+    "lang chain": "LangChain",
+    "chat gpt": "ChatGPT",
+    "vertex ai": "Vertex AI"
+  }
+}

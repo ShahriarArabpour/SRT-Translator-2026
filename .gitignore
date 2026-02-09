@@ -1,0 +1,24 @@
+# Ignore video files
+*.mp4
+*.mkv
+*.avi
+*.mov
+
+# Ignore subtitle files in input/output (keep the folders via .gitkeep if needed)
+input/*.srt
+output/*.srt
+!input/.gitkeep
+!output/.gitkeep
+
+# Ignore environment variables (Safety First!)
+.env
+
+# Python junk
+__pycache__/
+*.py[cod]
+venv/
+.vscode/
+
+# OS junk
+Thumbs.db
+.DS_Store
